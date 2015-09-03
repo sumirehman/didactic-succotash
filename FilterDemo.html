@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Filter Demo</title>
+    <script src="js/angular.min.js"></script>
+    <script src="js/myAppModule.js"></script>
+</head>
+<body ng-app="myAppModule" ng-controller="MyFilterDemoControl">
+    <p>
+        <!-- Unfiltered data -->
+        Consumption: {{data.consumption }}<br />
+        <strong>First Name</strong>: {{data.firstName}}<br />
+        <strong>Surname:</strong> {{data.surname | stripDashes }}<br />
+        Full Name: {{ data.firstName + ' ' + data.surname | toTitleCase}}<br />
+        Date Joined: {{data.dateJoined}}
+    </p>
+    <p>
+        <!-- Filtered data -->
+        <strong>First Name</strong>: {{data.firstName | lowercase}}<br />
+        <strong>Surname:</strong> {{data.surname | lowercase }}<br />
+        Consumption: {{data.consumption | number:2 }}<br />
+        Date Joined: {{data.dateJoined | date : 'dd/MM/yyyy'}}
+    <p>
+        <h2>Gigabytes used over the last 3 months</h2>
+        <ul>
+            <li ng-repeat="gigabytes in data.monthlyUsageHistory | limitTo : -3">
+                {{ gigabytes | number:2}}
+            </li>
+        </ul>
+</body>
+</html>
